@@ -10,7 +10,10 @@ import com.trilogyed.gamestoreinvoicing.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -81,12 +84,12 @@ public class GameStoreInvoicingServiceLayer {
 
         } else if (invoiceViewModel.getItemType().equals(GAME_ITEM_TYPE)) {
 
-            Optional<GameViewModel> game = client.getGameInfo(invoice.getItemId());
+            GameViewModel game = client.getGame(invoice.getItemId());
 
-            if(invoiceViewModel.getQuantity() >  game.get().getQuantity()){
+            if(invoiceViewModel.getQuantity() >  game.getQuantity()){
                 throw new IllegalArgumentException("Requested quantity is unavailable.");
             }
-            invoice.setUnitPrice(game.get().getPrice());
+            invoice.setUnitPrice(game.getPrice());
 
         } else if (invoiceViewModel.getItemType().equals(TSHIRT_ITEM_TYPE)) {
 
@@ -191,12 +194,84 @@ public class GameStoreInvoicingServiceLayer {
         return ivmList;
     }
 
-    public ResponseEntity<List<ConsoleViewModel>> getAllConsoles(){
-        return client.getAllConsoles();
-    }
-
     public void deleteInvoice(long id){
         invoiceRepo.deleteById(id);
+    }
+
+    public Optional<ConsoleViewModel> getConsole(@PathVariable long id){
+        return client.getConsole(id);
+    }
+
+    public Optional<TShirtViewModel> getTShirt(@PathVariable long id){
+        Optional<TShirtViewModel> tshirt = client.getTShirt(id);
+        return tshirt;
+    }
+    public ConsoleViewModel createConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel){
+        ConsoleViewModel console = client.createConsole(consoleViewModel);
+        return console;
+    }
+
+    public void updateConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel){
+        client.updateConsole(consoleViewModel);
+    }
+    public List<ConsoleViewModel> getAllConsoles(){
+        return client.getAllConsoles();
+    }
+    public GameViewModel createGame(@RequestBody @Valid GameViewModel gameViewModel){
+        GameViewModel game = client.createGame(gameViewModel);
+        return game;
+    }
+    public GameViewModel getGame(@PathVariable("id") long gameId) {
+        return client.getGame(gameId);
+    }
+    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu){
+        return  client.getAllConsoles();
+    }
+//    public GameViewModel getGame(@PathVariable("id") long gameId){
+//        GameViewModel game = client.getGame(gameId);
+//        return game;
+//    }
+
+    public void updateGame(@RequestBody @Valid GameViewModel gameViewModel){
+        client.updateGame(gameViewModel);
+    }
+
+    public void deleteGame(@PathVariable("id") int gameId){
+        client.deleteGame(gameId);
+    }
+    public List<GameViewModel> getGamesByTitle(@PathVariable String title){
+        return client.getAllGames();
+    }
+    public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb){
+        return client.getGamesByEsrbRating(esrb);
+    }
+    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio){
+        return client.getGamesByStudio(studio);
+    }
+    public List<GameViewModel> getAllGames(){
+        return client.getAllGames();
+    }
+    public TShirtViewModel createTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel){
+        return client.createTShirt(tShirtViewModel);
+    }
+    public void updateTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel){
+        client.updateTShirt(tShirtViewModel);
+    }
+
+    public void deleteTShirt(@PathVariable("id") int tShirtId){
+        client.deleteTShirt(tShirtId);
+    }
+
+    public List<TShirtViewModel> getTShirtsBySize(@PathVariable("size") String size){
+        return client.getTShirtsBySize(size);
+    }
+
+    public List<TShirtViewModel> getTShirtsByColor(@PathVariable("color") String color){
+        return client.getTShirtsByColor(color);
+    }
+
+    public List<TShirtViewModel> getAllTShirts(){
+        return client.getAllTShirts();
     }
 
     public InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
