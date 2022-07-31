@@ -11,8 +11,6 @@ import com.trilogyed.gamestorecatalog.viewModel.GameViewModel;
 import com.trilogyed.gamestorecatalog.viewModel.TShirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +18,8 @@ import java.util.Optional;
 @Component
 public class GameStoreServiceLayer {
 
-    private final BigDecimal PROCESSING_FEE = new BigDecimal("15.49");
-    private final BigDecimal MAX_INVOICE_TOTAL = new BigDecimal("999.99");
-    private final String GAME_ITEM_TYPE = "Game";
-    private final String CONSOLE_ITEM_TYPE = "Console";
-    private final String TSHIRT_ITEM_TYPE = "T-Shirt";
+
+
 
     GameRepository gameRepo;
     ConsoleRepository consoleRepo;

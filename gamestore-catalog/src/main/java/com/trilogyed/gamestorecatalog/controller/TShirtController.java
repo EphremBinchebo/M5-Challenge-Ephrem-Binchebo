@@ -3,7 +3,6 @@ package com.trilogyed.gamestorecatalog.controller;
 import com.trilogyed.gamestorecatalog.service.GameStoreServiceLayer;
 import com.trilogyed.gamestorecatalog.viewModel.TShirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

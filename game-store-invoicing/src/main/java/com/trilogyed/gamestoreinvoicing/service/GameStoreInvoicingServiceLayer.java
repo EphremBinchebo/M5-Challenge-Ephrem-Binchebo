@@ -72,7 +72,7 @@ public class GameStoreInvoicingServiceLayer {
         if (invoiceViewModel.getItemType().equals(CONSOLE_ITEM_TYPE)) {
 
             Optional<ConsoleViewModel> console = client.getConsole(invoice.getItemId());
-            
+
             if (invoiceViewModel.getQuantity()> console.get().getQuantity()){
                 throw new IllegalArgumentException("Requested quantity is unavailable.");
             }

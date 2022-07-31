@@ -27,6 +27,10 @@ public interface GameStoreCatalogClient {
     @ResponseStatus(HttpStatus.OK)
     public Optional<TShirtViewModel> getTShirt(@PathVariable long id);
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TShirtViewModel createTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel);
+
     @GetMapping("/console")
     public ResponseEntity<List<ConsoleViewModel>> getAllConsoles();
 }
