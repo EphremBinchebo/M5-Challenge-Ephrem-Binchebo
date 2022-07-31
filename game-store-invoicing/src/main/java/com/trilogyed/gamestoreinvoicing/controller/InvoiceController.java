@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/invoice")
+@RequestMapping()
 @RestController
 public class InvoiceController {
     @Autowired
@@ -21,14 +21,14 @@ public class InvoiceController {
     @Autowired
     private GameStoreInvoicingServiceLayer service;
 
-    @PostMapping
+    @PostMapping("/invoice")
     @ResponseStatus(HttpStatus.CREATED)
     public InvoiceViewModel purchaseItem(@RequestBody @Valid InvoiceViewModel invoiceViewModel) {
         invoiceViewModel = service.createInvoice(invoiceViewModel);
         return invoiceViewModel;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/invoice/{id}")
     @ResponseStatus(HttpStatus.OK)
     public InvoiceViewModel findInvoice(@PathVariable("id") long invoiceId) {
         InvoiceViewModel invoiceViewModel = service.getInvoice(invoiceId);
@@ -39,7 +39,7 @@ public class InvoiceController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/invoice")
     @ResponseStatus(HttpStatus.OK)
     public List<InvoiceViewModel> findAllInvoices() {
         List<InvoiceViewModel> invoiceViewModelList = service.getAllInvoices();
@@ -51,7 +51,7 @@ public class InvoiceController {
         }
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/invoice/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<InvoiceViewModel> findInvoicesByCustomerName(@PathVariable String name) {
         List<InvoiceViewModel> invoiceViewModelList = service.getInvoicesByCustomerName(name);
