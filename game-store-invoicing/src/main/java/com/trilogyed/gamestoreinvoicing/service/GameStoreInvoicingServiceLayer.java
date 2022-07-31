@@ -17,15 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class GameStoreInvoicingServiceLayer {
 
 
     private final BigDecimal PROCESSING_FEE = new BigDecimal("15.49");
     private final BigDecimal MAX_INVOICE_TOTAL = new BigDecimal("999.99");
-    private final String GAME_ITEM_TYPE = "Games";
-    private final String CONSOLE_ITEM_TYPE = "Consoles";
-    private final String TSHIRT_ITEM_TYPE = "T-Shirts";
+    private final String GAME_ITEM_TYPE = "Game";
+    private final String CONSOLE_ITEM_TYPE = "Console";
+    private final String TSHIRT_ITEM_TYPE = "T-Shirt";
 
 
     GameStoreCatalogClient client;
@@ -71,16 +72,10 @@ public class GameStoreInvoicingServiceLayer {
         if (invoiceViewModel.getItemType().equals(CONSOLE_ITEM_TYPE)) {
 
             Optional<ConsoleViewModel> console = client.getConsole(invoice.getItemId());
-
-//            if (returnVal.isPresent()) {
-//                tempCon = returnVal.get();
-//            } else {
-//                throw new IllegalArgumentException("Requested item is unavailable.");
-//            }
-//
-//            if (invoiceViewModel.getQuantity()> tempCon.getQuantity()){
-//                throw new IllegalArgumentException("Requested quantity is unavailable.");
-//            }
+            
+            if (invoiceViewModel.getQuantity()> console.get().getQuantity()){
+                throw new IllegalArgumentException("Requested quantity is unavailable.");
+            }
 
             invoice.setUnitPrice(console.get().getPrice());
 
@@ -88,32 +83,20 @@ public class GameStoreInvoicingServiceLayer {
 
             Optional<GameViewModel> game = client.getGameInfo(invoice.getItemId());
 
-//            if (returnVal.isPresent()) {
-//                tempGame = returnVal.get();
-//            } else {
-//                throw new IllegalArgumentException("Requested item is unavailable.");
-//            }
-//
-//            if(invoiceViewModel.getQuantity() >  tempGame.getQuantity()){
-//                throw new IllegalArgumentException("Requested quantity is unavailable.");
-//            }
+            if(invoiceViewModel.getQuantity() >  game.get().getQuantity()){
+                throw new IllegalArgumentException("Requested quantity is unavailable.");
+            }
             invoice.setUnitPrice(game.get().getPrice());
-//
+
         } else if (invoiceViewModel.getItemType().equals(TSHIRT_ITEM_TYPE)) {
 
             Optional<TShirtViewModel> tshirt = client.getTShirt(invoice.getItemId());
-//
-//            if (returnVal.isPresent()) {
-//                tempTShirt = returnVal.get();
-//            } else {
-//                throw new IllegalArgumentException("Requested item is unavailable.");
-//            }
-//
-//            if(invoiceViewModel.getQuantity() >  tempTShirt.getQuantity()){
-//                throw new IllegalArgumentException("Requested quantity is unavailable.");
-//            }
+
+            if(invoiceViewModel.getQuantity() >  tshirt.get().getQuantity()){
+                throw new IllegalArgumentException("Requested quantity is unavailable.");
+            }
             invoice.setUnitPrice(tshirt.get().getPrice());
-//
+
         } else {
             throw new IllegalArgumentException(invoiceViewModel.getItemType() +
                     ": Unrecognized Item type. Valid ones: T-Shirt, Console, or Game");

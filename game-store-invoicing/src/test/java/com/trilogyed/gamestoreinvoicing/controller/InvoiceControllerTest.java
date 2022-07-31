@@ -7,18 +7,14 @@ import com.trilogyed.gamestoreinvoicing.viewmodel.InvoiceViewModel;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +101,7 @@ public class InvoiceControllerTest {
         savedInvoice.setCity("any City");
         savedInvoice.setState("NY");
         savedInvoice.setZipcode("10016");
-        savedInvoice.setItemType("T-Shirts");
+        savedInvoice.setItemType("T-Shirt");
         savedInvoice.setItemId(12);//pretending item exists with this id...
         savedInvoice.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         savedInvoice.setQuantity(2);
@@ -145,7 +141,7 @@ public class InvoiceControllerTest {
         savedInvoice1.setCity("any City");
         savedInvoice1.setState("NY");
         savedInvoice1.setZipcode("10016");
-        savedInvoice1.setItemType("T-Shirts");
+        savedInvoice1.setItemType("T-Shirt");
         savedInvoice1.setItemId(12);//pretending item exists with this id...
         savedInvoice1.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         savedInvoice1.setQuantity(2);
@@ -161,7 +157,7 @@ public class InvoiceControllerTest {
         savedInvoice2.setCity("any town");
         savedInvoice2.setState("NJ");
         savedInvoice2.setZipcode("08234");
-        savedInvoice2.setItemType("Consoles");
+        savedInvoice2.setItemType("Console");
         savedInvoice2.setItemId(120);//pretending item exists with this id...
         savedInvoice2.setUnitPrice(new BigDecimal("129.50"));//pretending item exists with this price...
         savedInvoice2.setQuantity(1);
@@ -177,7 +173,7 @@ public class InvoiceControllerTest {
         savedInvoice3.setCity("any where");
         savedInvoice3.setState("CA");
         savedInvoice3.setZipcode("90016");
-        savedInvoice3.setItemType("Games");
+        savedInvoice3.setItemType("Game");
         savedInvoice3.setItemId(19);//pretending item exists with this id...
         savedInvoice3.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         savedInvoice3.setQuantity(4);
@@ -222,7 +218,7 @@ public class InvoiceControllerTest {
         savedInvoice1.setCity("any City");
         savedInvoice1.setState("NY");
         savedInvoice1.setZipcode("10016");
-        savedInvoice1.setItemType("T-Shirts");
+        savedInvoice1.setItemType("T-Shirt");
         savedInvoice1.setItemId(12);//pretending item exists with this id...
         savedInvoice1.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         savedInvoice1.setQuantity(2);
@@ -238,7 +234,7 @@ public class InvoiceControllerTest {
         savedInvoice2.setCity("any town");
         savedInvoice2.setState("NJ");
         savedInvoice2.setZipcode("08234");
-        savedInvoice2.setItemType("Consoles");
+        savedInvoice2.setItemType("Console");
         savedInvoice2.setItemId(120);//pretending item exists with this id...
         savedInvoice2.setUnitPrice(new BigDecimal("129.50"));//pretending item exists with this price...
         savedInvoice2.setQuantity(1);
@@ -254,7 +250,7 @@ public class InvoiceControllerTest {
         savedInvoice3.setCity("any where");
         savedInvoice3.setState("CA");
         savedInvoice3.setZipcode("90016");
-        savedInvoice3.setItemType("Games");
+        savedInvoice3.setItemType("Game");
         savedInvoice3.setItemId(19);//pretending item exists with this id...
         savedInvoice3.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         savedInvoice3.setQuantity(4);
@@ -296,7 +292,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -320,7 +316,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -345,7 +341,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -369,7 +365,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -394,7 +390,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -418,7 +414,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity(null);
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -443,7 +439,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -467,7 +463,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState(null);
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -492,7 +488,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -516,7 +512,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode(null);
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -590,7 +586,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(0);
@@ -614,7 +610,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirts");
+        inInvoiceMV.setItemType("T-Shirt");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(50001);
