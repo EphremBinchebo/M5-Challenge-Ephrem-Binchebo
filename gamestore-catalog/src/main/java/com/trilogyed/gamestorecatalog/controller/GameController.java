@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/game")
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RefreshScope
 public class GameController {
 
     @Autowired
@@ -64,7 +63,7 @@ public class GameController {
         }
     }
 
-    @GetMapping("/esrb/{esrb}")
+    @GetMapping("/esrbrating/{esrb}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb) {
         List<GameViewModel> gamesByEsrbRating = service.getGameByEsrb(esrb);

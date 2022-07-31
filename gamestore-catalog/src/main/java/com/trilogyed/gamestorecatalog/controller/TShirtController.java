@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/tshirt")
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RefreshScope
 public class TShirtController {
 
     @Autowired

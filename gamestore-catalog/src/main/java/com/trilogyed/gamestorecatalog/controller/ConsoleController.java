@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/console")
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RefreshScope
 public class ConsoleController {
 
     @Autowired
