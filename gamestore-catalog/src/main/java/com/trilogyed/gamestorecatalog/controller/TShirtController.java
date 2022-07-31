@@ -53,7 +53,7 @@ public class TShirtController {
         service.deleteTShirt(tShirtId);
     }
 
-    @GetMapping("/{size}")
+    @GetMapping("/size/{size}")
     @ResponseStatus(HttpStatus.OK)
     public List<TShirtViewModel> getTShirtsBySize(@PathVariable("size") String size) {
         List<TShirtViewModel> tvmBySize = service.getTShirtBySize(size);
@@ -63,7 +63,7 @@ public class TShirtController {
         return tvmBySize;
     }
 
-    @GetMapping("/{color}")
+    @GetMapping("/color/{color}")
     @ResponseStatus(HttpStatus.OK)
     public List<TShirtViewModel> getTShirtsByColor(@PathVariable("color") String color) {
         List<TShirtViewModel> tvmByColor = service.getTShirtByColor(color);

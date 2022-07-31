@@ -89,16 +89,16 @@ public class GameStoreServiceLayer {
     public void deleteGame(long id) {
         gameRepo.deleteById(id);
     }
-//
-//    public List<GameViewModel> getGameByEsrb(String esrb) {
-//        List<Game> gameList = gameRepo.findAllByEsrbRating(esrb);
-//        List<GameViewModel> gvmList = new ArrayList<>();
-//        if (gameList == null)
-//            return null;
-//        else
-//            gameList.stream().forEach(g -> gvmList.add(buildGameViewModel(g)));
-//        return gvmList;
-//    }
+
+    public List<GameViewModel> getGameByEsrb(String esrb) {
+        List<Game> gameList = gameRepo.findAllByEsrbRating(esrb);
+        List<GameViewModel> gvmList = new ArrayList<>();
+        if (gameList == null)
+            return null;
+        else
+            gameList.stream().forEach(g -> gvmList.add(buildGameViewModel(g)));
+        return gvmList;
+    }
 
     public List<GameViewModel> getGameByTitle(String title) {
         List<Game> gameList = gameRepo.findAllByTitle(title);

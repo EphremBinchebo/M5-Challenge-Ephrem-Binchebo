@@ -63,30 +63,30 @@ public class GameController {
             return gamesByTitle;
         }
     }
-//
-//    @GetMapping("/{esrb}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb) {
-//        List<GameViewModel> gamesByEsrbRating = service.getGameByEsrb(esrb);
-//
-//        if (gamesByEsrbRating == null || gamesByEsrbRating.isEmpty()) {
-//            throw new IllegalArgumentException("No games were found with ESRB Rating " + esrb);
-//        } else {
-//            return gamesByEsrbRating;
-//        }
-//    }
 
-//    @GetMapping("/{studio}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio) {
-//        List<GameViewModel> gamesByStudio = service.getGameByStudio(studio);
-//
-//        if (gamesByStudio == null || gamesByStudio.isEmpty()) {
-//            throw new IllegalArgumentException("No games were found from " + studio);
-//        } else {
-//            return gamesByStudio;
-//        }
-//    }
+    @GetMapping("/esrb/{esrb}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb) {
+        List<GameViewModel> gamesByEsrbRating = service.getGameByEsrb(esrb);
+
+        if (gamesByEsrbRating == null || gamesByEsrbRating.isEmpty()) {
+            throw new IllegalArgumentException("No games were found with ESRB Rating " + esrb);
+        } else {
+            return gamesByEsrbRating;
+        }
+    }
+
+    @GetMapping("/studio/{studio}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio) {
+        List<GameViewModel> gamesByStudio = service.getGameByStudio(studio);
+
+        if (gamesByStudio == null || gamesByStudio.isEmpty()) {
+            throw new IllegalArgumentException("No games were found from " + studio);
+        } else {
+            return gamesByStudio;
+        }
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

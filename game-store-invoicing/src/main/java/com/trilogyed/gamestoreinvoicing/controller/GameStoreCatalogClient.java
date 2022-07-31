@@ -15,14 +15,9 @@ import java.util.Optional;
 
 @FeignClient(name="gamestore-catalog")
 public interface GameStoreCatalogClient {
-
-
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<ConsoleViewModel> getConsole(@PathVariable long id);
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsole(@RequestBody ConsoleViewModel consoleViewModel);
 
     @GetMapping("game/{id}")
     @ResponseStatus(HttpStatus.OK)
