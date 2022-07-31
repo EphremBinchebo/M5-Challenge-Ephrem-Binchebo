@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/invoice")
@@ -18,7 +19,7 @@ public class InvoiceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public InvoiceViewModel purchaseItem(@RequestBody InvoiceViewModel invoiceViewModel) {
+    public InvoiceViewModel purchaseItem(@RequestBody @Valid InvoiceViewModel invoiceViewModel) {
         invoiceViewModel = service.createInvoice(invoiceViewModel);
         return invoiceViewModel;
     }

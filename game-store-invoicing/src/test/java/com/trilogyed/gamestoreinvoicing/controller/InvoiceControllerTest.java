@@ -7,10 +7,12 @@ import com.trilogyed.gamestoreinvoicing.viewmodel.InvoiceViewModel;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,9 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(InvoiceController.class)
 @AutoConfigureMockMvc(addFilters = false)
-@EnableFeignClients
 public class InvoiceControllerTest {
-    @MockBean(name = "client")
+    @MockBean
     GameStoreCatalogClient client;
     @Autowired
     private MockMvc mockMvc;
@@ -368,7 +369,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirt");
+        inInvoiceMV.setItemType("T-Shirts");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(2);
@@ -589,7 +590,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirt");
+        inInvoiceMV.setItemType("T-Shirts");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(0);
@@ -613,7 +614,7 @@ public class InvoiceControllerTest {
         inInvoiceMV.setCity("any City");
         inInvoiceMV.setState("NY");
         inInvoiceMV.setZipcode("10016");
-        inInvoiceMV.setItemType("T-Shirt");
+        inInvoiceMV.setItemType("T-Shirts");
         inInvoiceMV.setItemId(12);//pretending item exists with this id...
         inInvoiceMV.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoiceMV.setQuantity(50001);
