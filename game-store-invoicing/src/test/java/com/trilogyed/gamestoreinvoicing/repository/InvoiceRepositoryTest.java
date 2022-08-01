@@ -28,12 +28,6 @@ public class InvoiceRepositoryTest {
 
     @Autowired
     InvoiceRepository invoiceRepository;
-//    @Autowired
-//    TShirtRepository tShirtRepository;
-//    @Autowired
-//    GameRepository gameRepository;
-//    @Autowired
-//    ConsoleRepository consoleRepository;
     @Autowired
     GameStoreCatalogClient client;
     @Autowired
@@ -171,9 +165,9 @@ public class InvoiceRepositoryTest {
         List<Invoice> foundOneinvoice = invoiceRepository.findByName(invoice1.getName());
 
         //Assert
-        assertEquals(foundOneinvoice.size(),1);
+        assertEquals(foundOneinvoice.size(), 1);
 
         //Assert
-        assertEquals(foundNoinvoice.size(),0);
+        assertEquals(foundNoinvoice.size(), 0);
     }
 }

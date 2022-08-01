@@ -14,13 +14,10 @@ import com.trilogyed.gamestoreinvoicing.viewmodel.InvoiceViewModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,12 +27,12 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 public class GameStoreInvoicingServiceLayerTest {
 
+    GameStoreInvoicingServiceLayer service;
     @MockBean
     GameStoreCatalogClient client;
     InvoiceRepository invoiceRepository;
     ProcessingFeeRepository processingFeeRepository;
     TaxRepository taxRepository;
-    GameStoreInvoicingServiceLayer service;
 
     @Before
     public void setUp() throws Exception {
@@ -58,7 +55,7 @@ public class GameStoreInvoicingServiceLayerTest {
         tShirt.setDescription("V-Neck");
         tShirt.setPrice(new BigDecimal("19.99"));
         tShirt.setQuantity(5);
-        tShirt = service.client.createTShirt(tShirt);
+        tShirt = client.createTShirt(tShirt);
 
         InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
         invoiceViewModel.setName("John Jake");
