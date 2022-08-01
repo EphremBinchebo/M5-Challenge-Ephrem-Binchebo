@@ -29,7 +29,7 @@ public class GameStoreServiceLayerTest {
     ConsoleRepository consoleRepository;
     GameRepository gameRepository;
     TShirtRepository tShirtRepository;
-    GameStoreServiceLayer service;
+    GameStoreCatalogServiceLayer service;
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +38,7 @@ public class GameStoreServiceLayerTest {
         setUpTShirtRepositoryMock();
 
 
-        service = new GameStoreServiceLayer(
+        service = new GameStoreCatalogServiceLayer(
                 gameRepository, consoleRepository, tShirtRepository);
     }
 

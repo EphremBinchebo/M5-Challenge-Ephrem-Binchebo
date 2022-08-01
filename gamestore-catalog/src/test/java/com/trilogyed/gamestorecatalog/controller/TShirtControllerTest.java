@@ -3,7 +3,7 @@ package com.trilogyed.gamestorecatalog.controller;
 //import static org.junit.Assert.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trilogyed.gamestorecatalog.service.GameStoreServiceLayer;
+import com.trilogyed.gamestorecatalog.service.GameStoreCatalogServiceLayer;
 import com.trilogyed.gamestorecatalog.viewModel.TShirtViewModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,7 @@ public class TShirtControllerTest {
     // The aim of this unit test is to test the controller and NOT the service layer.
     // Therefore mock the service layer.
     @MockBean
-    private GameStoreServiceLayer storeServiceLayer;
+    private GameStoreCatalogServiceLayer storeServiceLayer;
 
     @Autowired
     //used to move between Objects and JSON

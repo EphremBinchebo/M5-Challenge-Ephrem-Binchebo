@@ -11,23 +11,20 @@ import com.trilogyed.gamestorecatalog.viewModel.GameViewModel;
 import com.trilogyed.gamestorecatalog.viewModel.TShirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class GameStoreServiceLayer {
-
-
-
-
+public class GameStoreCatalogServiceLayer {
     GameRepository gameRepo;
     ConsoleRepository consoleRepo;
     TShirtRepository tShirtRepo;
 
     @Autowired
-    public GameStoreServiceLayer(GameRepository gameRepo, ConsoleRepository consoleRepo, TShirtRepository tShirtRepo
-                                 ) {
+    public GameStoreCatalogServiceLayer(GameRepository gameRepo, ConsoleRepository consoleRepo, TShirtRepository tShirtRepo
+    ) {
         this.gameRepo = gameRepo;
         this.consoleRepo = consoleRepo;
         this.tShirtRepo = tShirtRepo;
@@ -37,7 +34,7 @@ public class GameStoreServiceLayer {
 
         // Validate incoming Game Data in the view model.
         // All validations were done using JSR303
-        if (gameViewModel==null) throw new IllegalArgumentException("No Game is passed! Game object is null!");
+        if (gameViewModel == null) throw new IllegalArgumentException("No Game is passed! Game object is null!");
 
         Game game = new Game();
         game.setTitle(gameViewModel.getTitle());
@@ -50,6 +47,7 @@ public class GameStoreServiceLayer {
         gameViewModel.setId(gameRepo.save(game).getId());
         return gameViewModel;
     }
+
     public GameViewModel getGameById(long id) {
         Optional<Game> game = gameRepo.findById(id);
         if (game == null)
@@ -62,11 +60,11 @@ public class GameStoreServiceLayer {
     public void updateGame(GameViewModel gameViewModel) {
 
         //Validate incoming Game Data in the view model
-        if (gameViewModel==null)
+        if (gameViewModel == null)
             throw new IllegalArgumentException("No Game data is passed! Game object is null!");
 
         //make sure the game exists. and if not, throw exception...
-        if (this.getGameById(gameViewModel.getId())==null)
+        if (this.getGameById(gameViewModel.getId()) == null)
             throw new IllegalArgumentException("No such game to update.");
 
         Game game = new Game();
@@ -135,7 +133,7 @@ public class GameStoreServiceLayer {
 
         // Remember viewModel data was validated using JSR 303
         // Validate incoming Console Data in the view model
-        if (consoleViewModel==null) throw new IllegalArgumentException("No Console is passed! Game object is null!");
+        if (consoleViewModel == null) throw new IllegalArgumentException("No Console is passed! Game object is null!");
 
         Console console = new Console();
         console.setModel(consoleViewModel.getModel());
@@ -159,7 +157,7 @@ public class GameStoreServiceLayer {
     public void updateConsole(ConsoleViewModel consoleViewModel) {
 
         //Validate incoming Console Data in the view model
-        if (consoleViewModel==null)
+        if (consoleViewModel == null)
             throw new IllegalArgumentException("No console data is passed! Console object is null!");
 
         //make sure the Console exists. and if not, throw exception...
@@ -210,7 +208,7 @@ public class GameStoreServiceLayer {
 
         // Remember model view has already been validated through JSR 303
         // Validate incoming TShirt Data in the view model
-        if (tShirtViewModel==null) throw new IllegalArgumentException("No TShirt is passed! TShirt object is null!");
+        if (tShirtViewModel == null) throw new IllegalArgumentException("No TShirt is passed! TShirt object is null!");
 
         TShirt tShirt = new TShirt();
         tShirt.setSize(tShirtViewModel.getSize());
@@ -236,10 +234,10 @@ public class GameStoreServiceLayer {
 
         // Remember model view has already been validated through JSR 303
         // Validate incoming TShirt Data in the view model
-        if (tShirtViewModel==null) throw new IllegalArgumentException("No TShirt is passed! TShirt object is null!");
+        if (tShirtViewModel == null) throw new IllegalArgumentException("No TShirt is passed! TShirt object is null!");
 
         //make sure the Console exists. and if not, throw exception...
-        if (this.getTShirt(tShirtViewModel.getId())==null)
+        if (this.getTShirt(tShirtViewModel.getId()) == null)
             throw new IllegalArgumentException("No such TShirt to update.");
 
         TShirt tShirt = new TShirt();

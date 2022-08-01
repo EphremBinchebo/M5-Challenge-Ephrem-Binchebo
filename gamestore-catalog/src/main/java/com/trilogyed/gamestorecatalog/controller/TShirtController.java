@@ -1,6 +1,6 @@
 package com.trilogyed.gamestorecatalog.controller;
 
-import com.trilogyed.gamestorecatalog.service.GameStoreServiceLayer;
+import com.trilogyed.gamestorecatalog.service.GameStoreCatalogServiceLayer;
 import com.trilogyed.gamestorecatalog.viewModel.TShirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 public class TShirtController {
 
     @Autowired
-    GameStoreServiceLayer service;
+    GameStoreCatalogServiceLayer service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
