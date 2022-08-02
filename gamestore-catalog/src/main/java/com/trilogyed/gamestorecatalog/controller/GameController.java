@@ -62,7 +62,7 @@ public class GameController {
         }
     }
 
-    @GetMapping("/esrbrating/{esrb}")
+    @GetMapping("/esrbRating/{esrb}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb) {
         List<GameViewModel> gamesByEsrbRating = service.getGameByEsrb(esrb);

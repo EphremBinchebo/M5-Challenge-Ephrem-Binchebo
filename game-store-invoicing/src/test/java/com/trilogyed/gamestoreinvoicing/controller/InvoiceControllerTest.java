@@ -38,7 +38,7 @@ public class InvoiceControllerTest {
     // The aim of this unit test is to test the controller and NOT the service layer.
     // Therefore mock the service layer.
     @MockBean
-    private GameStoreInvoicingServiceLayer storeServiceLayer;
+    private GameStoreInvoicingServiceLayer service;
 
     @Autowired
     //used to move between Objects and JSON
@@ -81,7 +81,7 @@ public class InvoiceControllerTest {
         outputJson = mapper.writeValueAsString(savedInvoice);
 
         //Mock call to service layer...
-        when(storeServiceLayer.createInvoice(inInvoice)).thenReturn(savedInvoice);
+        when(service.createInvoice(inInvoice)).thenReturn(savedInvoice);
 
         //Act & Assert
         this.mockMvc.perform(post("/invoice")
@@ -114,7 +114,7 @@ public class InvoiceControllerTest {
         String outputJson = mapper.writeValueAsString(savedInvoice);
 
         //Mock call to service layer...
-        when(storeServiceLayer.getInvoice(22)).thenReturn(savedInvoice);
+        when(service.getInvoice(22)).thenReturn(savedInvoice);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice/{id}", 22))
@@ -123,7 +123,7 @@ public class InvoiceControllerTest {
                 .andExpect(content().json(outputJson));
 
         //Mock call to service layer...
-        when(storeServiceLayer.getInvoice(-1)).thenReturn(null);
+        when(service.getInvoice(-1)).thenReturn(null);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice/{id}", -1))
@@ -191,7 +191,7 @@ public class InvoiceControllerTest {
         String outputJson = mapper.writeValueAsString(foundAllInvoices);
 
         //Mock call to service layer...
-        when(storeServiceLayer.getAllInvoices()).thenReturn(foundAllInvoices);
+        when(service.getAllInvoices()).thenReturn(foundAllInvoices);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice"))
@@ -200,7 +200,7 @@ public class InvoiceControllerTest {
                 .andExpect(content().json(outputJson));
 
         //Mock call to service layer...
-        when(storeServiceLayer.getAllInvoices()).thenReturn(null);
+        when(service.getAllInvoices()).thenReturn(null);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice"))
@@ -267,7 +267,7 @@ public class InvoiceControllerTest {
         String outputJson = mapper.writeValueAsString(foundAllInvoices);
 
         //Mock call to service layer...
-        when(storeServiceLayer.getInvoicesByCustomerName("Sandy Beach")).thenReturn(foundAllInvoices);
+        when(service.getInvoicesByCustomerName("Sandy Beach")).thenReturn(foundAllInvoices);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice/name/{name}","Sandy Beach"))
@@ -276,7 +276,7 @@ public class InvoiceControllerTest {
                 .andExpect(content().json(outputJson));
 
         //Mock call to service layer...
-        when(storeServiceLayer.getInvoicesByCustomerName("no customer")).thenReturn(null);
+        when(service.getInvoicesByCustomerName("no customer")).thenReturn(null);
 
         //Act & Assert
         this.mockMvc.perform(get("/invoice/name/{name}","no customer"))
@@ -301,14 +301,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName(null);
@@ -325,14 +325,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //Street...
         inInvoiceMV = new InvoiceViewModel();
@@ -350,14 +350,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -374,14 +374,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //City...
         inInvoiceMV = new InvoiceViewModel();
@@ -399,14 +399,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -423,14 +423,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //state...
         inInvoiceMV = new InvoiceViewModel();
@@ -448,14 +448,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -472,14 +472,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //Zip...
         inInvoiceMV = new InvoiceViewModel();
@@ -497,14 +497,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -521,14 +521,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //Item type...
         inInvoiceMV = new InvoiceViewModel();
@@ -546,14 +546,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -570,14 +570,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         //Quantity...
         inInvoiceMV = new InvoiceViewModel();
@@ -595,14 +595,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().is4xxClientError()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");
@@ -619,14 +619,14 @@ public class InvoiceControllerTest {
         inInvoiceMV.setProcessingFee(new BigDecimal("10.00"));
         inInvoiceMV.setTotal(inInvoiceMV.getSubtotal().add(inInvoiceMV.getTax()).add(inInvoiceMV.getProcessingFee()));
 
-        when(this.storeServiceLayer.createInvoice(inInvoiceMV)).thenReturn(null);
+        when(this.service.createInvoice(inInvoiceMV)).thenReturn(null);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/invoice")
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().isBadRequest()); //Expected response status code.
 
     }
 }
