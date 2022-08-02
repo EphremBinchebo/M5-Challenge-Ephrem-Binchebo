@@ -80,7 +80,7 @@ public class InvoiceController {
     public TShirtViewModel getTShirt(@PathVariable long id) {
         return service.getTShirt(id);
     }
-    
+
     @PutMapping("/console")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel) {

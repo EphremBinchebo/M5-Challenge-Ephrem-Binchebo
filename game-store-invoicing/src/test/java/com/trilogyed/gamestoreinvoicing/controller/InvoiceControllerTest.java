@@ -128,7 +128,7 @@ public class InvoiceControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/invoice/{id}", -1))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
 
     }
 
@@ -205,7 +205,7 @@ public class InvoiceControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/invoice"))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
 
     }
 
@@ -281,7 +281,7 @@ public class InvoiceControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/invoice/name/{name}","no customer"))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -602,7 +602,7 @@ public class InvoiceControllerTest {
                                 .content(mapper.writeValueAsString(inInvoiceMV)) //converts object to JSON and places into RequestBody
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) //for debugging purposes. Prints the request, handler,... and response objects to the console below.
-                .andExpect(status().isUnprocessableEntity()); //Expected response status code.
+                .andExpect(status().is4xxClientError()); //Expected response status code.
 
         inInvoiceMV = new InvoiceViewModel();
         inInvoiceMV.setName("Rob Bank");

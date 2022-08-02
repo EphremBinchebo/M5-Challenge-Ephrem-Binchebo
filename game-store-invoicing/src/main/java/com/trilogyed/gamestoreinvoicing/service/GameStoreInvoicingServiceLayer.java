@@ -159,10 +159,12 @@ public class GameStoreInvoicingServiceLayer {
 
     public InvoiceViewModel getInvoice(long id) {
         Optional<Invoice> invoice = invoiceRepo.findById(id);
-        if (invoice == null)
-            return null;
-        else
-            return buildInvoiceViewModel(invoice.get());
+//        if (invoice == null)
+//            return null;
+//        else
+//            return buildInvoiceViewModel(invoice.get());
+
+        return invoice.isPresent() ? buildInvoiceViewModel(invoice.get()) : null;
     }
 
     public List<InvoiceViewModel> getAllInvoices() {

@@ -229,7 +229,7 @@ public class TShirtControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/tshirt/color/{color}","non-existent color"))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -283,7 +283,7 @@ public class TShirtControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/tshirt/size/{size}","XL"))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -337,7 +337,7 @@ public class TShirtControllerTest {
         //Act & Assert
         this.mockMvc.perform(get("/tshirt"))
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     //test for bad incoming data...

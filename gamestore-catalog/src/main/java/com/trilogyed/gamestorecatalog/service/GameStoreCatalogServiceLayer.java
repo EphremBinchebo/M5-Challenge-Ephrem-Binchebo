@@ -50,10 +50,8 @@ public class GameStoreCatalogServiceLayer {
 
     public GameViewModel getGameById(long id) {
         Optional<Game> game = gameRepo.findById(id);
-        if (game == null)
-            return null;
-        else
-            return buildGameViewModel(game.get());
+
+        return game.isPresent() ? buildGameViewModel(game.get()) : null;
     }
 
 
@@ -148,10 +146,8 @@ public class GameStoreCatalogServiceLayer {
 
     public ConsoleViewModel getConsoleById(long id) {
         Optional<Console> console = consoleRepo.findById(id);
-        if (console == null)
-            return null;
-        else
-            return buildConsoleViewModel(console.get());
+
+        return console.isPresent() ? buildConsoleViewModel(console.get()) : null;
     }
 
     public void updateConsole(ConsoleViewModel consoleViewModel) {
@@ -224,10 +220,8 @@ public class GameStoreCatalogServiceLayer {
 
     public TShirtViewModel getTShirt(long id) {
         Optional<TShirt> tShirt = tShirtRepo.findById(id);
-        if (tShirt == null)
-            return null;
-        else
-            return buildTShirtViewModel(tShirt.get());
+
+        return tShirt.isPresent() ? buildTShirtViewModel(tShirt.get()) : null;
     }
 
     public void updateTShirt(TShirtViewModel tShirtViewModel) {
